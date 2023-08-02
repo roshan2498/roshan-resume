@@ -22,19 +22,3 @@ jobs:
       with:
         name: roshan-resume 
         path: resume.pdf
-    
-    - name: Move PDF to Repo Directory
-      run: |
-        mkdir -p $GITHUB_WORKSPACE/resume
-        mv resume.pdf $GITHUB_WORKSPACE/resume/
-    
-    - name: Update Repo with PDF
-      uses: de-vri-es/setup-git-credentials@v2
-      with:
-        credentials: ${{secrets.GIT_CREDENTIALS}}
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add resume/
-          git commit -m "Add generated resume PDF"
-          git push --set-upstream origin $GITHUB_REF
