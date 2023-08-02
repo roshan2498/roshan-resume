@@ -1,24 +1,14 @@
-name: LaTeX to PDF
+name: Awesome-CV
 
-on:
-  push:
-    branches:
-      - main  
+on: [push]
 
 jobs:
-  build:
+  awesome-cv-job:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Compile LaTeX to PDF
-      uses: xu-cheng/latex-action@v2
-      with: 
-        root_file: resume.tex
-
-    - name: Upload PDF File
-      uses: actions/upload-artifact@v3
+    - uses: actions/checkout@v1
+    - uses: olivierodo/awesome-cv-action@0.0.1
+      env:
+        ROSHAN_TOKEN: ${{ secrets.ROSHAN_TOKEN }}
       with:
-        name: roshan-resume 
-        path: resume.pdf
+        FILE_NAME: 'resume.tex'
