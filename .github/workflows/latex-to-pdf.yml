@@ -1,0 +1,24 @@
+name: LaTeX to PDF
+
+on:
+  push:
+    branches:
+      - main  
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Compile LaTeX to PDF
+      uses: xu-cheng/latex-action@v2
+      with: 
+        root_file: resume.tex
+
+    - name: Upload PDF File
+      uses: actions/upload-artifact@v3
+      with:
+        name: roshan-resume 
+        path: resume.pdf
