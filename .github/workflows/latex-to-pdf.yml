@@ -29,11 +29,12 @@ jobs:
         mv resume.pdf $GITHUB_WORKSPACE/resume/
     
     - name: Update Repo with PDF
-      env:
-        GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add resume/
-        git commit -m "Add generated resume PDF"
-        git push --set-upstream origin $GITHUB_REF
+      uses: de-vri-es/setup-git-credentials@v2
+      with:
+        credentials: ${{secrets.GIT_CREDENTIALS}}
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add resume/
+          git commit -m "Add generated resume PDF"
+          git push --set-upstream origin $GITHUB_REF
